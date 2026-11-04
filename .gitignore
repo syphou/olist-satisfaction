@@ -1,0 +1,18 @@
+# Données (trop volumineuses pour GitHub)
+data/raw/*
+data/processed/*
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+
+# Secrets
+.env
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# Divers
+.DS_Store
+Thumbs.db
