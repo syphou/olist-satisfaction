@@ -27,9 +27,9 @@ olist-satisfaction/
 ```
 
 ## Feuille de route
-- [ ] 0. Environnement et récupération des données
+- [x] 0. Environnement et récupération des données
 - [ ] 1. Modélisation (MCD / MLD)
-- [ ] 2. ETL Python → PostgreSQL + contrôles qualité
+- [x] 2. ETL Python → PostgreSQL + contrôles qualité
 - [ ] 3. Analyses SQL (KPI, cohortes, RFM)
 - [ ] 4. Statistiques : impact du retard sur la note
 - [ ] 5. Machine Learning : classification (avis négatif) + régression (délai)
@@ -42,8 +42,14 @@ python -m venv .venv
 # Windows : .venv\Scripts\activate   |   macOS/Linux : source .venv/bin/activate
 pip install -r requirements.txt
 copy .env.example .env        # (cp sous macOS/Linux) puis renseigner le mot de passe
-python src/check_setup.py
+python src/check_setup.py      # vérifie l'installation
+python src/explore.py          # découverte des données
+python src/etl.py              # charge les 9 tables dans PostgreSQL
 ```
+
+## Premier constat
+Une commande livrée **en retard** obtient une note moyenne de **2,27 / 5**, contre **4,29 / 5** à l'heure
+(6 409 commandes en retard sur ~96 000 livrées, soit ~7 %).
 
 ## Auteur
 Syphax Yahiaoui — Data Analyst
