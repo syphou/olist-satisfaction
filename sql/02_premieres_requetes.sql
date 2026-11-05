@@ -59,7 +59,26 @@ LIMIT 10;
 -- =====================================================================
 -- 🎯 À TOI DE JOUER (réponses à m'envoyer)
 -- a) Combien de clients DIFFÉRENTS (customer_unique_id) ont commandé ?
+SELECT COUNT(DISTINCT customer_unique_id) AS nb_clients_uniques
+FROM customers;
 -- b) Quels sont les 5 États (customer_state) avec le plus de commandes ?
+SELECT c.customer_state,
+       COUNT(*) AS nb_commandes
+FROM orders o
+JOIN customers c ON c.customer_id = o.customer_id
+GROUP BY c.customer_state
+ORDER BY nb_commandes DESC
+LIMIT 5;
 -- c) Quel est le panier moyen (prix moyen d'une commande) ?
+WITH paniers AS (
+    SELECT order_id,
+           SUM(price) AS montant_commande
+    FROM order_items
+    GROUP BY order_id
+)
+SELECT ROUND(AVG(montant_commande), 2) AS panier_moyen
+FROM paniers;
 --    Indice : additionner d'abord price par order_id, puis faire la moyenne.
 -- =====================================================================
+
+
