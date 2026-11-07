@@ -31,7 +31,7 @@ olist-satisfaction/
 - [ ] 1. Modélisation (MCD / MLD)
 - [x] 2. ETL Python → PostgreSQL + contrôles qualité
 - [x] 3. Analyses SQL (ventes, satisfaction, retards, fidélité)
-- [ ] 4. Statistiques : impact du retard sur la note
+- [x] 4. Statistiques : impact du retard sur la note
 - [ ] 5. Machine Learning : classification (avis négatif) + régression (délai)
 - [ ] 6. Dashboard Power BI
 - [ ] 7. Restitution et recommandations
@@ -58,6 +58,16 @@ Une commande livrée **en retard** obtient une note moyenne de **2,27 / 5**, con
 - **Fidélité** : 97 % des clients ne commandent qu'une seule fois.
 - **Retard et fidélité** : 3,07 % des clients livrés à l'heure reviennent contre 2,52 % en retard
   (khi-deux, p ≈ 0,015) : effet significatif mais modeste.
+
+## Principaux résultats statistiques (`notebooks/01_statistiques.ipynb`)
+- **Notes** : distribution en « J » – 57,8 % de 5 étoiles, **14,7 % d'avis négatifs** (1-2 étoiles).
+- **Retard → avis négatif** : 9,2 % d'avis négatifs à l'heure contre **62,4 %** en retard (khi-deux, p < 1e-300).
+- **Effet de seuil** : la note passe de 4,14 (0-5 j d'avance) à 2,99 dès 1-5 j de retard, puis ~1,7 au-delà de 6 j ;
+  livrer très en avance n'apporte que +0,18 point.
+- **Corrélations (Spearman) avec la note** : délai de livraison −0,24 (faible), nombre d'articles −0,11,
+  nombre de vendeurs −0,10 ; prix et frais de port négligeables (≈ −0,03).
+- **Recommandation** : garder des dates promises prudentes (surtout pour les États éloignés)
+  et prévenir le client en cas de risque de retard.
 
 ## Auteur
 Syphax Yahiaoui — Data Analyst
