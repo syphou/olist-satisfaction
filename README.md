@@ -32,7 +32,7 @@ olist-satisfaction/
 - [x] 2. ETL Python → PostgreSQL + contrôles qualité
 - [x] 3. Analyses SQL (ventes, satisfaction, retards, fidélité)
 - [x] 4. Statistiques : impact du retard sur la note
-- [ ] 5. Machine Learning : classification (avis négatif) + régression (délai)
+- [x] 5. Machine Learning : prédiction des avis négatifs (classification)
 - [ ] 6. Dashboard Power BI
 - [ ] 7. Restitution et recommandations
 
@@ -68,6 +68,20 @@ Une commande livrée **en retard** obtient une note moyenne de **2,27 / 5**, con
   nombre de vendeurs −0,10 ; prix et frais de port négligeables (≈ −0,03).
 - **Recommandation** : garder des dates promises prudentes (surtout pour les États éloignés)
   et prévenir le client en cas de risque de retard.
+
+## Machine Learning (`notebooks/02_machine_learning.ipynb`)
+**Objectif** : prédire si une commande recevra un avis négatif (1-2 étoiles), en évitant toute **fuite de données**.
+
+| Scénario | Moment de la prédiction | Meilleur modèle | ROC-AUC | Rappel |
+|---|---|---|---:|---:|
+| A | juste après l'achat | Forêt aléatoire | 0,655 | 47 % |
+| B | à la livraison, avant l'avis | Forêt aléatoire | **0,760** | 52 % |
+
+- Baseline « toujours positif » : 87,2 % d'accuracy mais **0 % de rappel** → l'accuracy est trompeuse sur des classes déséquilibrées.
+- Validation croisée 5 plis : ROC-AUC 0,759 ± 0,005 → modèle stable, pas de surapprentissage.
+- `GridSearchCV` (arbre) : gain négligeable → la limite vient des données, pas des réglages.
+- **Feature n°1 : le retard par rapport à la date promise** (importance par permutation), ce qui confirme l'étape statistiques.
+- Point de vigilance : `mois_achat` capte des crises logistiques passées ; une validation temporelle (train 2017 / test 2018) serait plus rigoureuse.
 
 ## Auteur
 Syphax Yahiaoui — Data Analyst
