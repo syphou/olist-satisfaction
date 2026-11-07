@@ -30,7 +30,7 @@ olist-satisfaction/
 - [x] 0. Environnement et récupération des données
 - [ ] 1. Modélisation (MCD / MLD)
 - [x] 2. ETL Python → PostgreSQL + contrôles qualité
-- [ ] 3. Analyses SQL (KPI, cohortes, RFM)
+- [x] 3. Analyses SQL (ventes, satisfaction, retards, fidélité)
 - [ ] 4. Statistiques : impact du retard sur la note
 - [ ] 5. Machine Learning : classification (avis négatif) + régression (délai)
 - [ ] 6. Dashboard Power BI
@@ -50,6 +50,14 @@ python src/etl.py              # charge les 9 tables dans PostgreSQL
 ## Premier constat
 Une commande livrée **en retard** obtient une note moyenne de **2,27 / 5**, contre **4,29 / 5** à l'heure
 (6 409 commandes en retard sur ~96 000 livrées, soit ~7 %).
+
+## Principaux résultats SQL (`sql/03_analyses.sql`)
+- **Panier moyen** : 137,75 R$ (hors frais de port).
+- **Saisonnalité** : pic d'activité en novembre 2017 (Black Friday).
+- **Retards** : concentrés dans les États éloignés des vendeurs, qui ont aussi les notes les plus basses.
+- **Fidélité** : 97 % des clients ne commandent qu'une seule fois.
+- **Retard et fidélité** : 3,07 % des clients livrés à l'heure reviennent contre 2,52 % en retard
+  (khi-deux, p ≈ 0,015) : effet significatif mais modeste.
 
 ## Auteur
 Syphax Yahiaoui — Data Analyst
