@@ -5,6 +5,9 @@
 2. Serveur : `localhost` · Base de données : `olist` · Mode : **Importer**
 3. Identifiants : onglet **Base de données** → utilisateur `postgres` + ton mot de passe
 4. Cocher **`vw_commandes`** et **`vw_articles`** → **Charger**
+5. ⚠️ Power BI nomme les tables **`public vw_commandes`** et **`public vw_articles`** :
+   double-clic sur chaque nom dans le panneau **Données** → renommer en **`vw_commandes`** et **`vw_articles`**
+   (sinon les formules DAX ci-dessous ne trouvent pas les tables).
 
 > Si un message parle de **chiffrement / certificat** : clique sur **OK** pour te connecter sans chiffrement
 > (normal pour une base installée sur ton propre ordinateur).
