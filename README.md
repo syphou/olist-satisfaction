@@ -45,6 +45,7 @@ copy .env.example .env        # (cp sous macOS/Linux) puis renseigner le mot de 
 python src/check_setup.py      # vérifie l'installation
 python src/explore.py          # découverte des données
 python src/etl.py              # charge les 9 tables dans PostgreSQL
+python src/scoring.py          # écrit les prédictions du modèle (table predictions) pour Power BI
 ```
 
 ## Premier constat

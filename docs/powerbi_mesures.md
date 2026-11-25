@@ -38,3 +38,25 @@ Créer chaque mesure : clic droit sur la table **vw_commandes → Nouvelle mesur
 2. **Logistique** – délais et retards par État, carte
 3. **Satisfaction** – note selon le retard, catégories les plus mal notées
 4. **Commandes à risque** – prédictions du modèle de Machine Learning
+
+## Page 4 – Commandes à risque (prédictions du modèle)
+1. Lancer `python src/scoring.py` (3 à 5 min) : crée la table **`predictions`** dans PostgreSQL.
+2. Power BI : **Accueil → Obtenir les données → PostgreSQL** → `localhost` / `olist` → cocher **`predictions`** → **Charger**,
+   puis renommer `public predictions` en **`predictions`**.
+3. Vue **Modèle** : vérifier la relation `predictions[order_id]` **1 ──── 1** `vw_commandes[order_id]`
+   (sinon, faire glisser `order_id` d'une table sur l'autre).
+
+| Colonne de `predictions` | Signification |
+|---|---|
+| `proba_achat` | probabilité d'avis négatif estimée juste après l'achat (scénario A) |
+| `proba_livraison` | probabilité d'avis négatif estimée à la livraison (scénario B) |
+| `niveau_risque` | 1. Élevé (10 % les plus à risque) · 2. Moyen (20 % suivants) · 3. Faible |
+| `avis_negatif` | ce qui s'est vraiment passé (1 = avis négatif) |
+
+Mesures (clic droit sur **predictions → Nouvelle mesure**) :
+
+| Mesure | Formule DAX | Format |
+|---|---|---|
+| Commandes à risque élevé | `Commandes à risque élevé = CALCULATE(COUNTROWS(predictions), predictions[niveau_risque] = "1. Élevé")` | Nombre entier |
+| % mécontents réels | `% mécontents réels = AVERAGE(predictions[avis_negatif])` | Pourcentage, 1 décimale |
+| Risque moyen | `Risque moyen = AVERAGE(predictions[proba_livraison])` | Pourcentage, 1 décimale |
