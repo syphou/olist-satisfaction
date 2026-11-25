@@ -28,12 +28,12 @@ olist-satisfaction/
 
 ## Feuille de route
 - [x] 0. Environnement et récupération des données
-- [ ] 1. Modélisation (MCD / MLD)
+- [x] 1. Modélisation (schéma relationnel `sql/01_schema.sql`)
 - [x] 2. ETL Python → PostgreSQL + contrôles qualité
 - [x] 3. Analyses SQL (ventes, satisfaction, retards, fidélité)
 - [x] 4. Statistiques : impact du retard sur la note
 - [x] 5. Machine Learning : prédiction des avis négatifs (classification)
-- [ ] 6. Dashboard Power BI
+- [x] 6. Dashboard Power BI (4 pages : vue d'ensemble, logistique, satisfaction, commandes à risque)
 - [ ] 7. Restitution et recommandations
 
 ## Lancer le projet
